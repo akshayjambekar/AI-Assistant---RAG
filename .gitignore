@@ -15,13 +15,16 @@ venv/
 .env
 
 venv/
+
 __pycache__/
 *.pyc
 
-data/
-chroma_db/
+
 
 .env
 
 .idea/
 .vscode/
+
+data_1/
+chroma_db_1/
