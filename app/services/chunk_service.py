@@ -1,3 +1,6 @@
+import logging
+
+logger = logging.getLogger(__name__)
 
 class ChunkService:
 
@@ -7,6 +10,10 @@ class ChunkService:
         chunk_size: int = 500,
         overlap: int = 100
     ) -> list[str]:
+
+        logger.info(
+            f"Chunking text of length {len(text)}"
+        )
 
         chunks = []
 
@@ -21,5 +28,9 @@ class ChunkService:
             chunks.append(chunk)
 
             start += (chunk_size - overlap)
+
+        logger.info(
+            f"Generated {len(chunks)} chunks"
+        )
 
         return chunks

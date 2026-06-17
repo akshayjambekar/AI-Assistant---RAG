@@ -36,7 +36,11 @@ async def upload_pdf(
         VectorService.add_document(
             doc_id=f"{file.filename}_{idx}",
             text=chunk,
-            embedding=embedding
+            embedding=embedding,
+            metadata={
+                "filename": file.filename,
+                "chunk_id": idx
+    }
         )
 
     return {

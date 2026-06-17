@@ -16,13 +16,14 @@ class VectorService:
         cls,
         doc_id,
         text,
-        embedding
+        embedding, metadata
     ):
 
         cls.collection.add(
             ids=[doc_id],
             documents=[text],
-            embeddings=[embedding]
+            embeddings=[embedding],
+            metadatas = [metadata]
         )
 
     @classmethod

@@ -1,5 +1,7 @@
 from pypdf import PdfReader
+import logging
 
+logger = logging.getLogger(__name__)
 
 class PDFService:
 
@@ -8,15 +10,31 @@ class PDFService:
         """
         Extract text from PDF.
         """
+        try:
 
-        reader = PdfReader(pdf_path)
+            logger.info(f"Reading PDF from {pdf_path}")
 
-        text = ""
+            reader = PdfReader(pdf_path)
 
-        for page in reader.pages:
-            page_text = page.extract_text()
+            text = ""
 
-            if page_text:
-                text += page_text + "\n"
+            for page in reader.pages:
 
-        return text
+                page_text = page.extract_text()
+
+                if page_text:
+                    text += page_text + "\n"
+
+            logger.info(
+                f"Successfully extracted {len(text)} characters"
+            )
+
+            return text
+
+        except Exception as e:
+
+            logger.error(
+                f"extract_text failed: {str(e)}"
+            )
+
+            raise

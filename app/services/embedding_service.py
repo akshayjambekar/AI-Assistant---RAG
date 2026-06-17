@@ -1,5 +1,6 @@
 from sentence_transformers import SentenceTransformer
-
+import logging
+logger = logging.getLogger(__name__)
 
 class EmbeddingService:
 
@@ -13,6 +14,24 @@ class EmbeddingService:
         text: str
     ):
 
-        embedding = cls.model.encode(text)
+        try:
 
-        return embedding.tolist()
+            logger.info(
+                f"Generating embedding for text length {len(text)}"
+            )
+
+            embedding = cls.model.encode(text)
+
+            logger.info(
+                f"Embedding generated successfully. Dimension: {len(embedding)}"
+            )
+
+            return embedding.tolist()
+
+        except Exception:
+
+            logger.exception(
+                "generate_embedding failed"
+            )
+
+            raise
